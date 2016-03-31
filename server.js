@@ -10,6 +10,12 @@ var express = require("express"),
     publicDir = process.argv[2] || __dirname + '/public',
     path = require('path');
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.get("/", function (req, res) {
   res.sendFile(path.join(publicDir, "/index.html"));
 });
